@@ -1,6 +1,11 @@
 package Lessons;
 
+import java.util.concurrent.CountDownLatch;
+
 public class Car implements Runnable{
+//    final int THREADS_COUNT = Main.CARS_COUNT;
+//    final CountDownLatch cdl = new CountDownLatch(THREADS_COUNT);
+
     private static int CARS_COUNT;
     static {
         CARS_COUNT = 0;
@@ -9,9 +14,11 @@ public class Car implements Runnable{
     private int speed;
     private String name;
     public String getName() {
+
         return name;
     }
     public int getSpeed() {
+
         return speed;
     }
     public Car(Race race, int speed) {
@@ -26,8 +33,10 @@ public class Car implements Runnable{
             System.out.println(this.name + " готовится");
             Thread.sleep(500 + (int)(Math.random() * 800));
             System.out.println(this.name + " готов");
+
         } catch (Exception e) {
             e.printStackTrace();
+
         }
         for (int i = 0; i < race.getStages().size(); i++) {
             race.getStages().get(i).go(this);

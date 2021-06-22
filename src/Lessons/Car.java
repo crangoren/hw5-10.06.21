@@ -10,6 +10,7 @@ public class Car implements Runnable{
 //    final CountDownLatch cdl = new CountDownLatch(THREADS_COUNT);
 
     private static int CARS_COUNT;
+    private static final int COUNTER = Main.CARS_COUNT;
     private static boolean winner;
     private static Lock win = new ReentrantLock();
     static {
@@ -48,11 +49,16 @@ public class Car implements Runnable{
             Thread.sleep(500 + (int)(Math.random() * 800));
             System.out.println(this.name + " готов");
             cb.await();
+
             for (int i = 0; i < race.getStages().size(); i++) {
                 race.getStages().get(i).go(this);
+                cdl.countDown();
+
             }
+            cdl.await();
             checkWinner(this);
             cb.await();
+
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -60,7 +66,7 @@ public class Car implements Runnable{
         }
 
     }
-    private static synchronized void checkWinner(Car c) {
+    private static void checkWinner(Car c) {
         if (!winner) {
             System.out.println(c.name + " - победитель!");
             winner = true;

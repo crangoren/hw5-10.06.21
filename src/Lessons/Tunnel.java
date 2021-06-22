@@ -16,8 +16,7 @@ public class Tunnel extends Stage {
 
     @Override
     public void go(Car c) {
-        try {
-            smp.acquire();
+
             try {
 
                 System.out.println(c.getName() + " готовится к этапу(ждет): " + description);
@@ -28,11 +27,10 @@ public class Tunnel extends Stage {
             } catch (InterruptedException e) {
                 e.printStackTrace();
             } finally {
+
                 System.out.println(c.getName() + " закончил этап: " + description);
                 smp.release();
             }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+
     }
 }

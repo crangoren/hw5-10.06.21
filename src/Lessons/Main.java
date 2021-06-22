@@ -27,12 +27,13 @@ public class Main {
 
         for (int i = 0; i < cars.length; i++) {
             new Thread(cars[i]).start();
+
         }
         try {
             cb.await();
             System.out.println("ВАЖНОЕ ОБЪЯВЛЕНИЕ >>> Гонка началась!!!");
-            cb.await();
 
+            cb.await();
             System.out.println("ВАЖНОЕ ОБЪЯВЛЕНИЕ >>> Гонка закончилась!!!");
         } catch (Exception e) {
             e.printStackTrace();
